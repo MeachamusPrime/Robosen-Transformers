@@ -1,4 +1,4 @@
 bleak==0.22.2
-keyboard==0.13.5; sys_platform == 'Windows'
+keyboard==0.13.5; sys_platform == 'win32'
 pydantic==2.7.3
 pygame==2.5.2
