@@ -83,24 +83,6 @@ async def list_ble_device_names() -> list:
             names.append(name)
     return names
 
-async def get_first_platform(name: str):
-    devices = await BleakScanner.discover(timeout = 5.0)
-    for device in devices:
-        if device.name is not None:
-            result = device.name.find(name)
-            if result != -1:
-                if name.find("OP-M-") == 0:
-                    print(f"Connecting to Optimus Prime: {device.name}\n\tFreedom is the right of all sentient beings...")
-                    return [device.address, Platforms.OPTIMUS_PRIME, name[5:]]
-                elif name.find("GSEG-") == 0:
-                    print(f"Connecting to Grimlock: {device.name}\n\tMe, Grimlock, stronger. Me, Grimlock must lead.")
-                    return [device.address, Platforms.GRIMLOCK, name[5:]]
-                elif name.find("MEGAF-") == 0:
-                    print(f"Connecting to Megatron: {device.name}\n\tPower flows to the one who knows how. Desire alone is not enough.")
-                    return [device.address, Platforms.GRIMLOCK, name[5:]]
-                    # return [device.address, Platforms.MEGATRON, name[5:]]
-    return ["", Platforms.UNKNOWN, "UNKNOWN"]
-
 class TextHandler(IRobotHandler):
     async def run(self):
 
