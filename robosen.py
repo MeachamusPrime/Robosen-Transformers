@@ -1912,14 +1912,18 @@ class RobotWrapper:
             return False
 
 class IRobotHandler:
-    def __new__(cls, *args, **kwargs):
-        if cls is IRobotHandler:
-            raise TypeError(f"Interface {cls.__name__} is being instantiated directly.\n"
-                            f"Create a class that inherits {cls.__name__} and create your own handling in its run() function.")
-        return object.__new__(cls, *args, **kwargs)
+    # def __new__(cls, *args, **kwargs):
+    #     if cls is IRobotHandler:
+    #         raise TypeError(f"Interface {cls.__name__} is being instantiated directly.\n"
+    #                         f"Create a class that inherits {cls.__name__} and create your own handling in its run() function.")
+    #     return object.__new__(cls, *args, **kwargs)
 
     # After creating your handler run this as the parameter in a call to asyncio.run()
     async def run():
+        # vvvv---This is to cause the interface to fail to run for this interface. Do Not include it in your override!!!---vvvv
+        raise TypeError(f"Interface IRobotHandler.run() is being aclled directly.\n"
+                        f"Create a class that inherits IRobotHandler and create your own handling in its overridden run() function.")
+        # ^^^^---This is to cause the interface to fail to run for this interface. Do Not include it in your override!!!---^^^^
         robot = []
         robot[0] = RobotWrapper()
         robot[0].create_robot("Bluetooth name of robot")
